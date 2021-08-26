@@ -284,7 +284,7 @@ lexChars yylval charToken =
 -- delimiters.
 --
 -- >>> lexComments ([("{-","-}")],["--"])
--- <INITIAL>"--"[^\n]* /* skip */; /* BNFC: comment "--" */
+-- <INITIAL>"--"[^\n\r]* /* skip */; /* BNFC: comment "--" */
 -- <INITIAL>"{-" BEGIN COMMENT; /* BNFC: block comment "{-" "-}" */
 -- <COMMENT>"-}" BEGIN INITIAL;
 -- <COMMENT>.    /* skip */;
@@ -305,13 +305,13 @@ commentStates = map ("COMMENT" ++) $ "" : map show [1..]
 -- comment.
 --
 -- >>> lexSingleComment "--"
--- <INITIAL>"--"[^\n]* /* skip */; /* BNFC: comment "--" */
+-- <INITIAL>"--"[^\n\r]* /* skip */; /* BNFC: comment "--" */
 --
 -- >>> lexSingleComment "\""
--- <INITIAL>"\""[^\n]* /* skip */; /* BNFC: comment "\"" */
+-- <INITIAL>"\""[^\n\r]* /* skip */; /* BNFC: comment "\"" */
 lexSingleComment :: String -> Doc
 lexSingleComment c =
-    "<INITIAL>" <> cstring c <> "[^\\n]*"
+    "<INITIAL>" <> cstring c <> "[^\\n\\r]*"
     <+> "/* skip */;"
     <+> unless (containsCCommentMarker c) ("/* BNFC: comment" <+> cstring c <+> "*/")
 

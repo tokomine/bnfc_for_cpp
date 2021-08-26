@@ -153,11 +153,11 @@ mkRule entrypoint (r:rs) = vcat
 
 -- | Create regex for single line comments
 -- >>> mkRegexSingleLineComment "--"
--- "--" (_ # '\n')*
+-- "--" [^ '\n' '\r']*
 -- >>> mkRegexSingleLineComment "\""
--- "\"" (_ # '\n')*
+-- "\"" [^ '\n' '\r']*
 mkRegexSingleLineComment :: String -> Doc
-mkRegexSingleLineComment s = cstring s <+> "(_ # '\\n')*"
+mkRegexSingleLineComment s = cstring s <+> "[^ '\\n' '\\r']*"
 
 -- | Create regex for multiline comments.
 -- >>> mkRegexMultilineComment "<!--" "-->"
