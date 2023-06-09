@@ -2,6 +2,21 @@
 
 Unreleased
 
+* Haskell/GADT: generated `ComposOp.hs` no longer needs `mtl` library [[#438](https://github.com/BNFC/bnfc/pull/438)]
+* Ocaml: fixed a crash in printer with unbalanced `}` [[#439](https://github.com/BNFC/bnfc/issues/439)]
+
+# 2.9.4.1
+
+Andreas Abel <andreas.abel@gu.se>,  December 2022
+
+* C/C++: allow space characters in token definitions again [[#431](https://github.com/BNFC/bnfc/issues/431)]
+  (regression in 2.9.0)
+* installation: get rid of `cabal-doctest` dependency [[#429](https://github.com/BNFC/bnfc/issues/429)]
+
+Tested GHC versions:
+* with `cabal`, GHC 7.10 - 9.4
+* with `stack`, GHC 8.2  - 9.4
+
 # 2.9.4
 
 Andreas Abel <andreas.abel@gu.se>,  February 2022

@@ -11,7 +11,12 @@ internal-tests :
 	make -C source test
 
 test :
-	cd testing && cabal v1-install && bnfc-system-tests && cd ..
+	make -C testing test
+
+# regenerate CI
+ci :
+	haskell-ci github cabal.project
+	cd .github/workflows ; patch -i haskell-ci.diff
 
 tag :
 	cd ./source && hasktags --etags .

@@ -1,13 +1,15 @@
 -- -- The name of GitHub Action
 -- github-action-name:
 
+branches: master ci*
+
 -- 2021-01-22 if cabal-version is greater than shipped Cabal, allow newer Cabal version
 -- https://github.com/haskell-CI/haskell-ci/issues/468#issuecomment-761865807
 -- https://github.com/haskell-CI/haskell-ci/blob/c4f692a254727a11004da819d3bd53a1b5f514ec/cabal.haskell-ci#L43-L45
 --
 -- By default `installed` constraints are used for packages
 -- in global db. We can modify which constraints are used.
-installed: +all -Cabal
+installed: +all
 
 -- Configure haskell-ci's behavior when presented multiple packages (e.g., a
 -- cabal.project file that specifies multiple .cabal files), each of which
@@ -24,15 +26,16 @@ jobs-selection: any
 -- As of 2021-02-27, these settings are ignored by github
 
 -- Additional jobs
-ghc-head: True
-macos-jobs: == 8.10.7
+-- macos-jobs: == 8.10.7
 
-no-tests-no-benchmarks: >= 9.0.1
+-- no-tests-no-benchmarks: >= 9.0.1
 -- end
 ---------------------------------------------------------------------------
 
--- -- Switch of tests for 9.2 (doctest not yet supported)
--- tests: < 9.2
+-- Switch off tests for 9.6.0 (HTF not available yet)
+-- tests: < 9.5
 
-allow-failures: >= 9.2
+-- allow-failures: >= 9.2
 
+-- New in Haskell-CI of Sep 2022
+haddock-components: libs
